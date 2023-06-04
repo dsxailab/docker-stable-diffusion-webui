@@ -4,3 +4,4 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocola
 
 choco upgrade -y wsl2
 choco upgrade -y docker-desktop
+choco upgrade -y docker-compose
