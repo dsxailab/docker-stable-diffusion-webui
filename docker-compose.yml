@@ -1,0 +1,21 @@
+services:
+  sdwebui:
+    image: universonic/stable-diffusion-webui
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+     restart: unless-stopped
+     ports:
+      - 7860:7860
+     volumes:
+      - ./extensions:/app/stable-diffusion-webui/extensions
+      - ./models:/app/stable-diffusion-webui/models
+      - ./outputs:/app/stable-diffusion-webui/outputs
+      - ./localizations:/app/stable-diffusion-webui/localizations
+      - ./styles.csv:/app/stable-diffusion-webui/styles.csv
+      - ./config.json:/app/stable-diffusion-webui/config.json
+     entrypoint: /app/entrypoint.sh --update-check --xformers --listen --port 7860
